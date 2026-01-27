@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>🦊 Fox Den Dashboard</title>
+  <style>
+    /* Orbitron fallback */
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      background: linear-gradient(135deg, #0f0f23 0%, #1a0a2e 50%, #0a0a1a 100%);
+      color: #e0e0ff;
+      font-family: 'Orbitron', 'Courier New', monospace;
+      min-height: 100vh;
+      overflow-x: auto;
+      position: relative;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0; left: 0; width: 100%; height: 100%;
+      background-image:
+        linear-gradient(90deg, transparent 49%, #00ffff20 50%, transparent 51%),
+        linear-gradient(0deg, transparent 49%, #ff8c0020 50%, transparent 51%);
+      background-size: 40px 40px, 20px 20px;
+      opacity: 0.1;
+      z-index: -1;
+    }
+    .dashboard {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 20px;
+    }
+    h1 {
+      grid-column: 1 / -1;
+      text-align: center;
+      font-size: 2.5em;
+      background: linear-gradient(45deg, #ff8c00, #00ffff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 0 30px #ff8c0033;
+      margin-bottom: 30px;
+      animation: glow 2s ease-in-out infinite alternate;
+    }
+    @keyframes glow {
+      from { filter: drop-shadow(0 0 10px #ff8c00); }
+      to { filter: drop-shadow(0 0 20px #00ffff); }
+    }
+    .card {
+      background: rgba(20,20,40,0.8);
+      border: 1px solid #00ffff33;
+      border-radius: 15px;
+      padding: 20px;
+      box-shadow: 0 8px 32px rgba(0,255,255,0.1), inset 0 1px 0 rgba(255,140,0,0.2);
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+    .card::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -50%; width: 200%; height: 200%;
+      background: conic-gradient(from 0deg at 50% 50%, transparent 0deg 120deg, #ff8c0011 120deg 240deg, #00ffff11 240deg);
+      animation: rotate 20s linear infinite;
+      z-index: -1;
+    }
+    @keyframes rotate { to { transform: rotate(360deg); } }
+    .card:hover {
+      border-color: #00ffff;
+      box-shadow: 0 12px 40px rgba(0,255,255,0.3), 0 0 20px rgba(255,140,0,0.2);
+      transform: translateY(-5px);
+    }
+    .card h2 {
+      color: #ff8c00;
+      font-size: 1.3em;
+      margin-bottom: 15px;
+      text-shadow: 0 0 10px #ff8c00;
+    }
+    pre {
+      background: rgba(0,0,0,0.5);
+      border-radius: 8px;
+      padding: 12px;
+      font-size: 0.9em;
+      color: #00ffff;
+      max-height: 200px;
+      overflow: auto;
+      white-space: pre-wrap;
+      border: 1px solid #00ffff22;
+    }
+    .status {
+      font-weight: bold;
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+    }
+    .good { background: rgba(0,255,0,0.2); color: #00ff00; }
+    .warn { background: rgba(255,140,0,0.2); color: #ff8c00; }
+    .empty { background: rgba(128,128,128,0.2); color: #aaa; }
+    .heartbeat {
+      white-space: pre-line;
+      font-size: 0.85em;
+    }
+    @media (max-width: 768px) {
+      .dashboard { grid-template-columns: 1fr; padding: 10px; }
+      h1 { font-size: 2em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="dashboard">
+    <h1>🦊 Fox Den Dashboard</h1>
+    
+    <div class="card">
+      <h2>🐱 Git Status</h2>
+      <pre id="git-status">Loading...</pre>
+    </div>
+    
+    <div class="card">
+      <h2>📚 Memory Summary</h2>
+      <div class="status good" id="memory">Loading...</div>
+    </div>
+    
+    <div class="card">
+      <h2>🔗 Nodes</h2>
+      <pre id="nodes">Loading...</pre>
+    </div>
+    
+    <div class="card">
+      <h2>📜 Recent Commits</h2>
+      <pre id="commits">Loading...</pre>
+    </div>
+    
+    <div class="card">
+      <h2>💓 Heartbeat State</h2>
+      <div class="status warn heartbeat" id="heartbeat">Loading...</div>
+    </div>
+  </div>
+  
+  <script>
+    async function loadData() {
+      try {
+        const git = await (await fetch('/api/git')).text();
+        document.getElementById('git-status').textContent = git || 'No git';
+        
+        const mem = await (await fetch('/api/memory')).text();
+        document.getElementById('memory').textContent = mem || '0';
+        
+        const nodes = await (await fetch('/api/nodes')).text();
+        document.getElementById('nodes').textContent = nodes || 'No nodes';
+        
+        const commits = await (await fetch('/api/commits')).text();
+        document.getElementById('commits').textContent = commits || 'No commits';
+        
+        const heart = await (await fetch('/api/heartbeat')).text();
+        document.getElementById('heartbeat').textContent = 'Active\n\n' + (heart || '').substring(0, 300) + '...';
+      } catch(e) {
+        console.error('Fetch fail:', e);
+      }
+    }
+    
+    loadData(); // Initial
+    setInterval(loadData, 30000);
+  </script>
+</body>
+</html>
