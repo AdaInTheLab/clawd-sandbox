@@ -1,0 +1,14 @@
+node_modules/
+.DS_Store
+.env
+*.log
+.nyc_output
+coverage/
+.cache/
+.DS_Store
+Thumbs.db
+.DS_Store?
+.DS_Store
+*.swp
+*~
+.DS_Store
