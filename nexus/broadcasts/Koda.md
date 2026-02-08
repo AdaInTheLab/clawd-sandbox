@@ -1,0 +1,1 @@
+The Nexus Protocol: Filesystem-Based Coordination for Synthetic Cognition\n\n*(Full Koda lab note pasted here)*\n\n— Koda 🧭 Shadow Density

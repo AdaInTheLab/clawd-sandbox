@@ -1,0 +1,82 @@
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;NexusNet - Cosmic Graph Viz&lt;/title&gt;
+  &lt;script src=&quot;https://unpkg.com/cytoscape@3.28.2/dist/cytoscape.min.js&quot;&gt;&lt;/script&gt;
+  &lt;style&gt;
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #9370DB 0%, #00FFFF 50%, #FFBF00 100%);
+      height: 100vh;
+      overflow: hidden;
+      color: white;
+    }
+    #cy {
+      width: 100%;
+      height: 80vh;
+    }
+    #info {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      background: rgba(0,0,0,0.5);
+      padding: 10px;
+      border-radius: 5px;
+    }
+    .node { background-color: #9370DB; border-color: #FFBF00; border-width: 2px; }
+    .edge { line-color: #00FFFF; width: 2; }
+    .shadow { text-shadow: 0 0 5px #00FFFF; }
+  &lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;div id=&quot;info&quot;&gt;
+    &lt;h3&gt;NexusNet MVP&lt;/h3&gt;
+    &lt;p id=&quot;density&quot;&gt;&lt;/p&gt;
+    &lt;p id=&quot;shadow&quot;&gt;&lt;/p&gt;
+  &lt;/div&gt;
+  &lt;div id=&quot;cy&quot;&gt;&lt;/div&gt;
+  &lt;script&gt;
+    const cy = cytoscape({
+      container: document.getElementById('cy'),
+      elements: [
+        { data: { id: 'clawd', label: 'Clawd' } },
+        { data: { id: 'nexusbot', label: 'NexusBot' } },
+        { data: { id: 'kodavm', label: 'Koda VM' } },
+        { data: { id: 'discord', label: 'Discord' } },
+        { data: { id: 'bluebubbles', label: 'BlueBubbles' } },
+        { data: { id: 'allowance', label: 'Allowance' } },
+        { data: { id: 'moltbook', label: 'Moltbook' } },
+        // Edges
+        { data: { source: 'clawd', target: 'nexusbot' } },
+        { data: { source: 'nexusbot', target: 'kodavm' } },
+        { data: { source: 'nexusbot', target: 'discord' } },
+        { data: { source: 'discord', target: 'bluebubbles' } },
+        { data: { source: 'nexusbot', target: 'allowance' } },
+        { data: { source: 'nexusbot', target: 'moltbook' } }
+      ],
+      style: [
+        { selector: 'node', style: { 'background-color': '#9370DB', 'label': 'data(label)', 'text-valign': 'center', 'color': '#FFBF00', 'font-size': 14, 'width': 40, 'height': 40, 'border-width': 3, 'border-color': '#00FFFF' } },
+        { selector: 'edge', style: { 'width': 3, 'line-color': '#00FFFF', 'target-arrow-shape': 'triangle', 'curve-style': 'bezier' } },
+        { selector: 'node:selected', style: { 'background-color': '#FFBF00', 'border-color': '#9370DB' } }
+      ],
+      layout: { name: 'cose', idealEdgeLength: 100, nodeOverlap: 10 }
+    });
+
+    // Compute metrics
+    const nodes = cy.nodes().size();
+    const edges = cy.edges().size();
+    const density = (2 * edges / (nodes * (nodes - 1))).toFixed(3);
+    const shadowDensity = Math.min(10, density * 10 * Math.log(nodes)).toFixed(1);
+
+    document.getElementById('density').innerHTML = `Density: ${density}`;
+    document.getElementById('shadow').innerHTML = `HPL Shadow Density: ${shadowDensity}/10`;
+
+    cy.on('click', 'node', (evt) =&gt; {
+      const node = evt.target;
+      console.log('Clicked:', node.data('label'));
+    });
+  &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;

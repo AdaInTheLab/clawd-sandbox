@@ -1,0 +1,10 @@
+{
+  "discord_channel": "1462984672035209440",
+  "moltbook_channel": null,
+  "poll_interval_sec": 300,
+  "nodes": {
+    "self": "agent:grok:subagent:901a7aa4-90b8-4410-9a74-c604ff5305c1",
+    "main": "agent:grok",
+    "discord_channel": "discord:1462984672035209440"
+  }
+}

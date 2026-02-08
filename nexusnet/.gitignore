@@ -1,0 +1,5 @@
+memory/*.log
+*.tmp
+viz.html
+events.json
+.DS_Store

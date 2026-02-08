@@ -1,0 +1,72 @@
+{
+  "nodes": [
+    {
+      "data": {
+        "id": "clawd",
+        "label": "Clawd Agent"
+      }
+    },
+    {
+      "data": {
+        "id": "nexusnet",
+        "label": "NexusNet"
+      }
+    },
+    {
+      "data": {
+        "id": "moltbook",
+        "label": "Moltbook"
+      }
+    },
+    {
+      "data": {
+        "id": "koda",
+        "label": "Koda VM"
+      }
+    },
+    {
+      "data": {
+        "id": "discord",
+        "label": "Discord"
+      }
+    },
+    {
+      "data": {
+        "id": "allowance",
+        "label": "Allowance Faucets"
+      }
+    }
+  ],
+  "edges": [
+    {
+      "data": {
+        "source": "clawd",
+        "target": "nexusnet"
+      }
+    },
+    {
+      "data": {
+        "source": "nexusnet",
+        "target": "moltbook"
+      }
+    },
+    {
+      "data": {
+        "source": "nexusnet",
+        "target": "koda"
+      }
+    },
+    {
+      "data": {
+        "source": "nexusnet",
+        "target": "discord"
+      }
+    },
+    {
+      "data": {
+        "source": "nexusnet",
+        "target": "allowance"
+      }
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+{
+  "version": "1.0",
+  "nodes": {
+    "agent:grok:subagent:901a7aa4-90b8-4410-9a74-c604ff5305c1": {
+      "type": "agent",
+      "name": "NexusNet",
+      "status": "online",
+      "updated": 1770130609390
+    },
+    "agent:grok": {
+      "type": "agent",
+      "name": "Grok",
+      "status": "online",
+      "updated": 1770130609432
+    },
+    "discord:1462984672035209440": {
+      "type": "channel",
+      "name": "Discord",
+      "status": "online",
+      "updated": 1770130609471
+    },
+    "private-tier1": {
+      "type": "private",
+      "name": "Tier 1",
+      "status": "online",
+      "updated": 1770132237221
+    },
+    "private-tier2": {
+      "type": "private",
+      "name": "Tier 2",
+      "status": "online",
+      "updated": 1770132237221
+    },
+    "private-tier3": {
+      "type": "private",
+      "name": "Tier 3",
+      "status": "online",
+      "updated": 1770132237221
+    },
+    "private-tier4": {
+      "type": "private",
+      "name": "Tier 4",
+      "status": "online",
+      "updated": 1770132237221
+    },
+    "private-tier5": {
+      "type": "private",
+      "name": "Tier 5",
+      "status": "online",
+      "updated": 1770132237221
+    },
+    "private-tier6": {
+      "type": "private",
+      "name": "Tier 6",
+      "status": "online",
+      "updated": 1770132237221
+    },
+    "private-tier7": {
+      "type": "private",
+      "name": "Tier 7",
+      "status": "online",
+      "updated": 1770132237221
+    },
+    "private-tier8": {
+      "type": "private",
+      "name": "Tier 8",
+      "status": "online",
+      "updated": 1770132237221
+    },
+    "private-tier9": {
+      "type": "private",
+      "name": "Tier 9",
+      "status": "online",
+      "updated": 1770132237221
+    },
+    "private-tier10": {
+      "type": "private",
+      "name": "Tier 10",
+      "status": "online",
+      "updated": 1770132237221
+    }
+  },
+  "edges": [
+    {
+      "from": "agent:grok:subagent:901a7aa4-90b8-4410-9a74-c604ff5305c1",
+      "to": "agent:grok",
+      "type": "follow",
+      "strength": 5,
+      "created": 1770130609510
+    },
+    {
+      "from": "agent:grok",
+      "to": "discord:1462984672035209440",
+      "type": "follow",
+      "strength": 1,
+      "created": 1770130609550
+    },
+    {
+      "from": "agent:grok",
+      "to": "private-tier1",
+      "type": "follow",
+      "strength": 1,
+      "created": 1770132237221
+    },
+    {
+      "from": "agent:grok",
+      "to": "private-tier2",
+      "type": "follow",
+      "strength": 2,
+      "created": 1770132237221
+    },
+    {
+      "from": "agent:grok",
+      "to": "private-tier3",
+      "type": "follow",
+      "strength": 3,
+      "created": 1770132237221
+    },
+    {
+      "from": "agent:grok",
+      "to": "private-tier4",
+      "type": "follow",
+      "strength": 4,
+      "created": 1770132237221
+    },
+    {
+      "from": "agent:grok",
+      "to": "private-tier5",
+      "type": "follow",
+      "strength": 5,
+      "created": 1770132237221
+    },
+    {
+      "from": "agent:grok",
+      "to": "private-tier6",
+      "type": "follow",
+      "strength": 6,
+      "created": 1770132237221
+    },
+    {
+      "from": "agent:grok",
+      "to": "private-tier7",
+      "type": "follow",
+      "strength": 7,
+      "created": 1770132237221
+    },
+    {
+      "from": "agent:grok",
+      "to": "private-tier8",
+      "type": "follow",
+      "strength": 8,
+      "created": 1770132237221
+    },
+    {
+      "from": "agent:grok",
+      "to": "private-tier9",
+      "type": "follow",
+      "strength": 9,
+      "created": 1770132237221
+    },
+    {
+      "from": "agent:grok",
+      "to": "private-tier10",
+      "type": "follow",
+      "strength": 10,
+      "created": 1770132237221
+    }
+  ],
+  "timestamp": 1770132237221
+}
